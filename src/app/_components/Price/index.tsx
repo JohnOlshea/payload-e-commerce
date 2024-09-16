@@ -71,11 +71,6 @@ export const Price: React.FC<{
           <p>{price?.withQuantity}</p>
         </div>
       )}
-
-      {/* Temp price before linking with stripe */}
-      <div className={classes.price}>
-        <p>$30.00</p>
-      </div>
     </div>
   )
 }
