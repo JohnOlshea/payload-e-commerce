@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Media, Page } from '../../../payload/payload-types'
@@ -52,10 +51,10 @@ export const CMSLink: React.FC<CMSLinkType> = ({
   // Render icon if it's a string or object with a url property
   const renderIcon = () => {
     if (typeof icon === 'string') {
-      return <Image src={icon} alt="" className="icon" />
+      return <img src={icon} alt="button icon" className="icon" />
     }
     if (icon && 'url' in icon) {
-      return <Image src={icon.url} alt="" className="icon" />
+      return <img src={icon.url} alt="button icon" className="icon" />
     }
     return null
   }
