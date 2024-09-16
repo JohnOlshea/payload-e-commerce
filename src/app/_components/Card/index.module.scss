@@ -1,7 +1,7 @@
 @import '../../_css/common';
 
-.card  {
-  border: 1px var(--theme-elevation-200) solid;
+.card {
+  position: relative;
   border-radius: 4px;
   height: 100%;
   display: flex;
@@ -9,24 +9,59 @@
 }
 
 .content {
-  padding: var(--base);
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base) / 2);
+  gap: 4px;
+  background-color: white;
+  width: 100%;
+
+  @include mid-break {
+    padding: 8px 0;
+  }
 
   @include small-break {
     padding: calc(var(--base) / 2);
     gap: calc(var(--base) / 4);
   }
+
+  &Price {
+    &:nth-child(1) {
+      position: absolute;
+      bottom: 28%;
+      left: 5%;
+      right: 5%;
+      justify-content: space-between;
+    }
+
+    @include mid-break {
+      position: static;
+      bottom: auto;
+      left: auto;
+      right: auto;
+    }
+  }
+
+  &Inner {
+    padding: 11px 15px;
+    border-radius: 0.9rem;
+    background-color: var(--color-dark-50);
+    margin-top: 5px;
+
+    @include mid-break {
+      margin-top: 0;
+    }
+  }
+
 }
 
 .title {
   margin: 0;
-}
-
-.titleLink {
-  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .centerAlign {
@@ -34,6 +69,7 @@
 }
 
 .body {
+  color: #545454;
   flex-grow: 1;
 }
 
@@ -54,6 +90,11 @@
 
 .description {
   margin: 0;
+  line-height: 24px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hideImageOnMobile {
@@ -66,11 +107,14 @@
   text-decoration: none;
   display: block;
   position: relative;
-  aspect-ratio: 16 / 9;
+  min-height: 342px;
 }
 
 .image {
+  border-radius: 0.9rem;
   object-fit: cover;
+  aspect-ratio: 1/1;
+  max-width: 100%;
 }
 
 .placeholder {

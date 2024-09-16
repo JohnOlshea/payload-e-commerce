@@ -1,6 +1,7 @@
 @use '../../../_css/queries.scss' as *;
 
-.nav {
+.nav, .cartAccountWrapper {
+  flex: 1;
   display: flex;
   gap: calc(var(--base) / 4) var(--base);
   align-items: center;
@@ -12,6 +13,10 @@
   > * {
     text-decoration: none;
   }
+}
+
+.cartAccountWrapper {
+  justify-content: flex-end;
 }
 
 .hide {

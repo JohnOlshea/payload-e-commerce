@@ -4,6 +4,11 @@ import Link from 'next/link'
 import { Page } from '../../../payload/payload-types'
 import { Button, Props as ButtonProps } from '../Button'
 
+// Define the icon type
+type IconType = {
+  url: string;
+}
+
 type CMSLinkType = {
   type?: 'custom' | 'reference'
   url?: string
@@ -17,6 +22,7 @@ type CMSLinkType = {
   children?: React.ReactNode
   className?: string
   invert?: ButtonProps['invert']
+  icon?: IconType // Add icon prop
 }
 
 export const CMSLink: React.FC<CMSLinkType> = ({
@@ -29,27 +35,31 @@ export const CMSLink: React.FC<CMSLinkType> = ({
   children,
   className,
   invert,
+  icon // Destructure icon prop
 }) => {
   const href =
     type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
-      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${
-          reference.value.slug
-        }`
+      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${reference.value.slug
+      }`
       : url
 
   if (!href) return null
 
-  if (!appearance) {
-    const newTabProps = newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+  const newTabProps = newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
-    if (href || url) {
-      return (
-        <Link {...newTabProps} href={href || url} className={className}>
-          {label && label}
-          {children && children}
-        </Link>
-      )
-    }
+  // Create content with icon if available
+  const content = (
+    <>
+      {icon && <img src={icon.url} alt="" className="icon" />} {/* Render icon if it exists */}
+    </>
+  );
+
+  if (!appearance) {
+    return (
+      <Link {...newTabProps} href={href} className={className}>
+        {content}
+      </Link>
+    )
   }
 
   return (
@@ -60,6 +70,8 @@ export const CMSLink: React.FC<CMSLinkType> = ({
       appearance={appearance}
       label={label}
       invert={invert}
-    />
+    >
+      {content}
+    </Button>
   )
 }

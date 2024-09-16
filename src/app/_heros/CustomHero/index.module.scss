@@ -1,0 +1,154 @@
+@import '../../_css/queries.scss';
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-top: -6rem;
+
+  @include small-break {
+    margin: 0;
+  }
+}
+
+.heroWrapper {
+  width: 100%;
+  max-width: 1560px;
+  max-height: 884px;
+  display: flex;
+  align-items: center;
+  background-color: #aecace;
+  background-position: 185%;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  border-radius: 2rem;
+
+  @include small-break {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.heroTextBox {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15% var(--gutter-h);
+  width: 100%;
+
+  @include mid-break {
+    padding: 10% 30px;
+  }
+
+  @include small-break {
+    padding: 50px 30px;
+  }
+
+  h2 {
+    font-size: 70px;
+    margin: 32px 0;
+
+    @include mid-break {
+      font-size: 48px;
+      margin: 24px 0;
+      white-space: wrap;
+    }
+
+    @include small-break {
+      width: 70%;
+      font-size: 36px;
+      margin: 8px 0;
+    }
+  }
+
+  p {
+    font-size: 30px;
+
+    strong {
+      background: #fcfd76;
+      color: black;
+      border-radius: 5rem;
+      padding: 0px 11px;
+      font-weight: 500;
+    }
+
+    @include mid-break {
+      font-size: 24px;
+    }
+
+    @include small-break {
+      font-size: 18px;
+    }
+  }
+}
+
+.linksWrapper {
+  display: flex;
+  margin-top: 50px;
+}
+
+.linksContainer {
+  background-color: black;
+  padding: 4px;
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+
+  li {
+    margin: 0;
+
+    a {
+      height: 3rem;
+      width: 3rem;
+      padding: 0;
+      border-radius: 50%;
+      box-shadow: none;
+      background: white;
+
+      div {
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+
+  &>* {
+    margin: calc(var(--base) / 2);
+  }
+
+  li {
+    a {
+      div {
+        img {
+          width: 24px;
+          height: 24px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+}
+
+.linkText {
+  color: white;
+  margin-right: 0.7rem;
+  max-width: 5rem;
+  text-align: right;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1rem;
+}
