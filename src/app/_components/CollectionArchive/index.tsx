@@ -5,13 +5,13 @@ import qs from 'qs'
 
 import type { Product } from '../../../payload/payload-types'
 import type { ArchiveBlockProps } from '../../_blocks/ArchiveBlock/types'
+import { useFilter } from '../../_providers/Filter'
 import { Card } from '../Card'
 import { Gutter } from '../Gutter'
 import { PageRange } from '../PageRange'
 import { Pagination } from '../Pagination'
 
 import classes from './index.module.scss'
-import { useFilter } from '../../_providers/Filter'
 
 type Result = {
   docs: (Product | string)[]
@@ -39,7 +39,7 @@ export type Props = {
 }
 
 export const CollectionArchive: React.FC<Props> = props => {
-  const { categoryFilters, sort } = useFilter();
+  const { categoryFilters, sort } = useFilter()
 
   const {
     className,
@@ -57,8 +57,8 @@ export const CollectionArchive: React.FC<Props> = props => {
     docs: (populateBy === 'collection'
       ? populatedDocs
       : populateBy === 'selection'
-        ? selectedDocs
-        : []
+      ? selectedDocs
+      : []
     )?.map(doc => doc.value),
     hasNextPage: false,
     hasPrevPage: false,
@@ -76,9 +76,7 @@ export const CollectionArchive: React.FC<Props> = props => {
   const isRequesting = useRef(false)
   const [page, setPage] = useState(1)
 
-  const categories = (categoryFilters || [])
-    .map((cat: string) => cat)
-    .join(',')
+  const categories = (categoryFilters || []).map((cat: string) => cat).join(',')
 
   const scrollToRef = useCallback(() => {
     const { current } = scrollRef
@@ -119,10 +117,10 @@ export const CollectionArchive: React.FC<Props> = props => {
           where: {
             ...(categories
               ? {
-                categories: {
-                  in: categories,
-                },
-              }
+                  categories: {
+                    in: categories,
+                  },
+                }
               : {}),
           },
         },
@@ -163,7 +161,7 @@ export const CollectionArchive: React.FC<Props> = props => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [page, categoryFilters, relationTo, onResultChange, sort, limit, populateBy])
+  }, [page, categories, categoryFilters, relationTo, onResultChange, sort, limit, populateBy])
 
   return (
     <div className={[classes.collectionArchive, className].filter(Boolean).join(' ')}>
@@ -183,9 +181,7 @@ export const CollectionArchive: React.FC<Props> = props => {
         <div className={classes.grid}>
           {results.docs?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
-              return (
-                <Card doc={result} relationTo={relationTo} showCategories />
-              )
+              return <Card doc={result} relationTo={relationTo} showCategories />
             }
 
             return null

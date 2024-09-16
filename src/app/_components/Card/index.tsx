@@ -19,10 +19,11 @@ const priceFromJSON = (priceJSON): string => {
       const priceType = parsed.type
       price = `${parsed.currency === 'usd' ? '$' : ''}${(priceValue / 100).toFixed(2)}`
       if (priceType === 'recurring') {
-        price += `/${parsed.recurring.interval_count > 1
-          ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-          : parsed.recurring.interval
-          }`
+        price += `/${
+          parsed.recurring.interval_count > 1
+            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+            : parsed.recurring.interval
+        }`
       }
     } catch (e) {
       console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
@@ -75,9 +76,7 @@ export const Card: React.FC<{
       </div>
 
       <div className={classes.content}>
-        <div className={classes.contentPrice}>
-          {doc && <Price product={doc} />}
-        </div>
+        <div className={classes.contentPrice}>{doc && <Price product={doc} />}</div>
         <div className={classes.contentInner}>
           {titleToUse && <h4 className={classes.title}>{titleToUse}</h4>}
           {description && (
